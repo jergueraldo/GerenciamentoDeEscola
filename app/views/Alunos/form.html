@@ -1,0 +1,70 @@
+#{extends 'main.html' /}
+
+#{set title:'Cadastro de Aluno' /}
+
+<section class="form-section student-registration-section" role="region" aria-labelledby="registration-heading">
+    <div class="container">
+        <h1 id="registration-heading" class="section-title">
+            #{if aluno} Atualizar dados #{/if}
+            #{else} Cadastrar novo aluno #{/else}
+        </h1>
+        <p class="section-description">
+            Preencha os detalhes abaixo para
+            #{if aluno} atualizar os dados corretamente #{/if}
+            #{else} cadastrar um novo aluno no sistema.#{/else}
+          
+        </p>
+
+        #{if flash.success}
+        <div class="message success" role="alert">
+            ${flash.success}
+        </div>
+        #{/if}
+        #{if flash.error}
+        <div class="message error" role="alert">
+            ${flash.error}
+        </div>
+        #{/if}
+        #{if flash.info}
+        <div class="message info" role="alert">
+            ${flash.info}
+        </div>
+        #{/if}
+
+        <form action="@{Alunos.salvar()}" method="POST" class="standard-form" novalidate>
+            <input type="hidden" name="aluno.id" value="${aluno?.id}">
+
+            <div class="form-group">
+                <label for="firstName">Nome:</label>
+                <input type="text" id="firstName" name="aluno.nome" placeholder="Digite o primeiro nome"
+                    value="${aluno?.nome}" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="contactEmail">E-mail de Contato:</label>
+                <input type="email" id="contactEmail" name="aluno.email" placeholder="aluno.email@exemplo.com"
+                    value="${aluno?.email}" required aria-required="true" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="contactPhone">Telefone de Contato:</label>
+                <input type="tel" id="contactPhone" name="aluno.telefone"
+                    placeholder="(XX) XXXX-XXXX ou (XX) 9XXXX-XXXX" value="${aluno?.email}">
+            </div>
+
+            <div class="form-group">
+                <label for="enrollmentNumber">Número de Matrícula:</label>
+                <input type="text" id="enrollmentNumber" name="aluno.matricula" placeholder="Ex: 2024001"
+                    value="${aluno?.matricula}" required aria-required="true">
+            </div>
+
+            <div class="form-group form-actions">
+                <a href="@{Application.index()}" class="button danger-button">Cancelar</a>
+                <button type="submit" class="button primary-button">
+                    #{if aluno} Atualizar dados de Aluno #{/if}
+                    #{else} Cadastrar Aluno #{/else}
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

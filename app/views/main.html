@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    </head>
-    <body>
+
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    #{get 'moreStyles' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="@{Application.index()}" aria-label="Ir para a Página Inicial">
+                    <img src="/public/images/logo.svg" alt="Logotipo Gerenciamento Escolar">
+                </a>
+            </div>
+                <div class="header-title">
+                    <h1>Sistema Escolar</h1>
+                </div>
+            <nav class="main-nav" role="navigation" aria-label="Navegação Principal">
+                <ul>
+                    <li><a href="@{Application.index()}" class="nav-link">início</a></li>
+                    <li><a href="@{Alunos.form()}" class="nav-link">Formulário</a></li>
+                    <li><a href="@{Alunos.listar()}" class="nav-link">Listagem</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
         #{doLayout /}
-        
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
-    </body>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content container">
+            <p>&copy; Gerenciamento Escolar</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript"
+        charset="${_response_encoding}"></script>
+    #{get 'moreScripts' /}
+</body>
+
 </html>

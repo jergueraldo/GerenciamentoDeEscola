@@ -1,4 +1,33 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Início - Gerenciamento Escolar' /}
 
-#{welcome /}
+<section class="hero-section">
+    <h1>Bem-vindo ao Gerenciamento Escolar</h1>
+    <p>Sua solução completa para gerenciar dados escolares, alunos e turmas de forma eficiente.</p>
+</section>
+
+<section class="action-cards-grid">
+    <article class="action-card" role="article" aria-labelledby="register-student-heading">
+        <div class="card-icon">
+            <i class="fas fa-user-plus"></i>
+        </div>
+        <h2 id="register-student-heading" class="card-title">Cadastrar novo aluno</h2>
+        <p class="card-description">Adicione rapidamente novos alunos ao sistema com todos os seus detalhes.</p>
+        <div class="card-actions">
+            <a href="@{Alunos.form()}" class="button primary-button"
+                aria-label="Ir para a página de cadastro de alunos">Cadastrar Aluno</a>
+        </div>
+    </article>
+
+    <article class="action-card" role="article" aria-labelledby="view-students-heading">
+        <div class="card-icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <h2 id="view-students-heading" class="card-title">Ver a lista de alunos</h2>
+        <p class="card-description">Acesse a lista completa de alunos registrados e seus perfis.</p>
+        <div class="card-actions">
+            <a href="@{Alunos.listar()}" class="button secondary-button"
+                aria-label="Ir para a página de listagem de alunos">Ver Alunos</a>
+        </div>
+    </article>
+</section>

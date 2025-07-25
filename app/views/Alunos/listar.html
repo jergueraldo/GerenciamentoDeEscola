@@ -1,0 +1,87 @@
+#{extends 'main.html' /}
+
+#{set title:'Lista de Alunos' /}
+
+<section class="list-section" role="region" aria-labelledby="list-heading">
+
+    <div class="container">
+        <h1 id="list-heading" class="section-title">Alunos Cadastrados</h1>
+        <p class="section-description">Visualize, filtre e gerencie todos os alunos registrados no sistema.</p>
+
+        #{if flash.success}
+        <div class="message success" role="alert">
+            ${flash.success}
+        </div>
+        #{/if}
+        #{if flash.error}
+        <div class="message error" role="alert">
+            ${flash.error}
+        </div>
+        #{/if}
+        #{if flash.info}
+        <div class="message info" role="alert">
+            ${flash.info}
+        </div>
+        #{/if}
+
+        <div class="filter-area">
+            <form action="@{Alunos.listar()}" method="GET" class="filter-form">
+                <div class="form-group-inline">
+                    <label for="filterName">Buscar por Nome:</label>
+                    <input type="text" id="filterName" name="filtro" placeholder="Nome, email, ou matricula">
+                </div>
+
+                <div class="form-actions-inline">
+                    <button type="submit" class="button primary-button">Aplicar Filtros</button>
+                    <a href="@{Alunos.listar()}" class="button secondary-button">Limpar Filtros</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Matricula</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    #{if alunos?.isEmpty()}
+                    <tr>
+                        <td colspan="6" class="no-data">Nenhum aluno encontrado com os critérios.</td>
+                    </tr>
+                    #{/if}
+                    #{else}
+                    #{list items:alunos, as:'aluno'}
+                    <tr>
+                        <td>${aluno.nome}</td>
+                        <td>${aluno.email}</td>
+                        <td>${aluno.telefone}</td>
+                        <td>${aluno.matricula}</td>
+                        <td class="table-actions">
+                          
+                            <a href="@{Alunos.editar(aluno.id)}" class="button action-button edit-button"
+                                title="Editar Aluno" aria-label="Editar detalhes de ${aluno.nome}">
+                                Editar
+                            </a>
+                            <a href="@{Alunos.remover(aluno.id)}">
+                                <button type="button" class="button action-button delete-button" title="Excluir Aluno"
+                                aria-label="Excluir ${aluno.nome}" data-student-id="${aluno.id}"
+                                data-student-name="${aluno.nome} ">
+                                Excluir
+                            </button>
+                        </a>
+                        </td>
+                    </tr>
+                    #{/list}
+                    #{/else}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>

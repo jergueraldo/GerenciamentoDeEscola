@@ -1,0 +1,902 @@
+/*
+ * Arquivo: main.css
+ * Descrição: Estilos globais e componentes principais para o Sistema Escolar.
+ *
+ * Conteúdo:
+ * 1. Variáveis Globais (Cores, Fontes, Sombras, Animações)
+ * 2. Reset Básico e Estilos do Body
+ * 3. Utilitários e Layout Base (Container, Esconder Visualmente)
+ * 4. Estilos do Header (Cabeçalho principal, Logo, Título)
+ * 5. Estilos da Navegação (Menu principal)
+ * 6. Estilos das Seções Principais (Página Inicial, Hero, Cards de Ação)
+ * 7. Estilos de Formulários (Geral, Filtros, Grupos de Campo)
+ * 8. Estilos de Botões (Primário, Secundário, Perigo)
+ * 9. Estilos de Tabela (Listagens de Dados, Ações da Tabela)
+ * 10. Mensagens de Feedback (Flash Messages: Sucesso, Erro, Info)
+ * 11. Estilos de Modal / Pop-up
+ * 12. Estilos de Rodapé (Footer)
+ * 13. Responsividade Geral (Media Queries para diferentes tamanhos de tela)
+ */
+
+/* --- 1. Variáveis Globais --- */
+:root {
+    /* Cores da Paleta */
+    --primary-color: #4CAF50;     /* Verde - para ações/botões principais */
+    --primary-dark: #388E3C;      /* Verde mais escuro */
+    --primary-light: #81C784;     /* Verde mais claro */
+
+    --secondary-color: #2196F3;   /* Azul - para ações/botões secundários */
+    --secondary-dark: #1976D2;    /* Azul mais escuro */
+    --secondary-light: #64B5F6;   /* Azul mais claro */
+
+    --danger-color: #dc3545;      /* Vermelho - para ações destrutivas */
+    --danger-dark: #c82333;       /* Vermelho mais escuro */
+    --danger-light: #f8d7da;      /* Vermelho mais claro (para backgrounds) */
+
+    --text-dark: #333333;         /* Cinza escuro para texto geral */
+    --text-light: #F5F5F5;         /* Cinza claro para texto em fundos escuros */
+
+    --background-light: #F8F9FA;  /* Cinza muito claro para o fundo principal */
+    --background-card: #FFFFFF;   /* Branco para fundos de cards */
+    --border-color: #E0E0E0;      /* Cinza claro para bordas */
+
+    /* Sombras e Efeitos */
+    --shadow-color: rgba(0, 0, 0, 0.1);          /* Sombra sutil para profundidade */
+    --hover-shadow-color: rgba(0, 0, 0, 0.2);    /* Sombra ligeiramente mais escura ao passar o mouse */
+
+    /* Transições e Animações */
+    --animation-duration: 0.3s;   /* Duração padrão da animação */
+    --animation-ease: ease-out;   /* Função de easing padrão */
+}
+
+/* --- 2. Reset Básico e Estilos do Body --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+    box-sizing: border-box; /* Define o modelo de caixa para todos os elementos */
+    min-height: 100vh; /* Garante que o body ocupa a altura total da viewport */
+    display: flex;
+    flex-direction: column; /* Permite que o footer "empurre" para baixo */
+}
+
+/* Garante que o conteúdo principal ocupe o espaço restante, empurrando o footer para o final */
+main {
+    flex-grow: 1;
+}
+
+/* Aplica o box-sizing a todos os elementos e pseudo-elementos */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* Estilos de links padrão */
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--animation-duration) var(--animation-ease);
+}
+
+/* Estilos de imagem padrão */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove espaço extra abaixo das imagens */
+}
+
+/* --- 3. Utilitários e Layout Base --- */
+/* Centraliza o conteúdo e define uma largura máxima */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Oculta o label visualmente, mas mantém para leitores de tela (acessibilidade) */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* --- 4. Estilos do Header --- */
+.main-header {
+    background-color: var(--primary-dark);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color); /* Adiciona uma borda inferior */
+    box-shadow: 0 2px 4px var(--shadow-color); /* Sombra sutil */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Espaçamento entre os itens do header */
+    align-items: center; /* Alinha verticalmente ao centro */
+    color: var(--text-light); /* Cor padrão para texto dentro do header */
+}
+
+.logo img {
+    height: 50px; /* Altura fixa da logo */
+    width: auto;
+    /* Filtro para transformar a cor da logo para branco (ideal para logos escuras em fundo escuro) */
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(190deg) brightness(103%) contrast(103%);
+    transition: transform var(--animation-duration) var(--animation-ease);
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+.header-title {
+    margin-right: auto; /* Empurra a navegação para a direita, dando espaço ao título */
+    margin-left: 20px;  /* Espaçamento entre a logo e o título */
+    text-align: left;
+}
+
+.header-title h1 {
+    margin: 0; /* Remove margens padrão do h1 */
+    font-size: 1.8em;
+    color: var(--text-light); /* Cor do título no header */
+    white-space: nowrap; /* Evita quebra de linha em telas maiores */
+    overflow: hidden;    /* Esconde o texto que excede o limite */
+    text-overflow: ellipsis; /* Adiciona '...' se o texto for cortado */
+}
+
+/* --- 5. Estilos da Navegação --- */
+.main-nav ul {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Layout flexível para os itens do menu */
+    gap: 25px; /* Espaço entre os links de navegação */
+}
+
+.main-nav .nav-link {
+    color: var(--text-light); /* Cor dos links da navegação no header */
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative; /* Para o efeito de underline */
+    transition: color var(--animation-duration) var(--animation-ease);
+}
+
+.main-nav .nav-link:hover {
+    color: var(--primary-light); /* Cor do link ao passar o mouse */
+}
+
+/* Efeito de underline ao passar o mouse */
+.main-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0; /* Começa sem largura */
+    height: 2px;
+    background-color: var(--secondary-light); /* Cor da linha de hover */
+    transition: width var(--animation-duration) var(--animation-ease);
+}
+
+.main-nav .nav-link:hover::after {
+    width: 100%; /* Expande a largura ao passar o mouse */
+}
+
+/* --- 6. Estilos das Seções Principais (Main Content) --- */
+
+/* Estilos de Seção Geral para Formulários e Listagens */
+.form-section, .list-section {
+    padding: 40px 0 60px; /* Preenchimento superior, inferior e lateral */
+    background-color: var(--background-light);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8em;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.section-description {
+    text-align: center;
+    font-size: 1.1em;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 40px; /* Centraliza e adiciona margem inferior */
+}
+
+/* --- Seção Hero (Página Inicial) --- */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--background-light);
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: 1.3em;
+    color: #555555;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- Grid de Cartões de Ação (Página Inicial) --- */
+.action-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo */
+    gap: 30px; /* Espaço entre os cartões */
+    padding-bottom: 60px; /* Padding antes do rodapé */
+}
+
+.action-card {
+    background-color: var(--background-card);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform var(--animation-duration) var(--animation-ease), box-shadow var(--animation-duration) var(--animation-ease);
+    display: flex;
+    flex-direction: column; /* Conteúdo em coluna */
+    justify-content: space-between; /* Empurra ações para o final */
+}
+
+.action-card:hover {
+    transform: translateY(-8px); /* Efeito de lift ao passar o mouse */
+    box-shadow: 0 8px 25px var(--hover-shadow-color); /* Sombra aprimorada no hover */
+}
+
+.card-icon {
+    font-size: 4em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    transition: color var(--animation-duration) var(--animation-ease);
+}
+
+.action-card:hover .card-icon {
+    color: var(--primary-dark); /* Ícone mais escuro no hover */
+}
+
+.card-title {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1em;
+    color: #666666;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
+}
+
+.card-actions {
+    margin-top: auto; /* Empurra os botões para a parte inferior do cartão */
+}
+
+/* --- 7. Estilos de Formulários --- */
+
+/* Estilos de Formulário Geral (para cadastro, edição, etc.) */
+.standard-form {
+    background-color: var(--background-card);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    max-width: 600px; /* Largura máxima para formulários */
+    margin: 0 auto; /* Centraliza o formulário */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block; /* Ocupa a largura total */
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Estilo para todos os inputs de texto, e-mail, data, telefone, senha, selects e textareas */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="tel"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-dark);
+    transition: border-color var(--animation-duration) var(--animation-ease), box-shadow var(--animation-duration) var(--animation-ease);
+}
+
+/* Estilo de foco para inputs e selects */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Sombra de foco */
+    outline: none; /* Remove o outline padrão do navegador */
+}
+
+/* Estilo para campos com erro de validação */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: var(--danger-color);
+}
+
+/* Mensagem de erro de validação */
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Agrupamento de botões de ação do formulário */
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 15px;
+}
+
+/* Estilos de Formulário de Filtro (na página de listagem) */
+.filter-area {
+    background-color: var(--background-card);
+    border-radius: 8px;
+    padding: 25px 30px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end; /* Alinha os itens do formulário de filtro na parte inferior */
+    width: 100%;
+    justify-content: center;
+}
+
+.form-group-inline {
+    flex: 1; /* Permite que o grupo de formulário cresça */
+    min-width: 200px;
+}
+
+.form-group-inline label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Estilo para inputs e selects inline de filtro */
+.form-group-inline input[type="text"],
+.form-group-inline input[type="email"],
+.form-group-inline select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    color: var(--text-dark);
+    transition: border-color var(--animation-duration) var(--animation-ease), box-shadow var(--animation-duration) var(--animation-ease);
+}
+
+.form-group-inline input:focus,
+.form-group-inline select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    outline: none;
+}
+
+.form-actions-inline {
+    display: flex;
+    gap: 10px;
+    align-self: flex-end; /* Alinha os botões de ação de filtro na parte inferior */
+    flex-wrap: wrap;
+}
+
+.form-actions-inline .button {
+    padding: 10px 20px; /* Padding ajustado para botões de filtro */
+    font-size: 1em;
+}
+
+/* --- 8. Estilos de Botões --- */
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--animation-duration) var(--animation-ease),
+                background-color var(--animation-duration) var(--animation-ease),
+                box-shadow var(--animation-duration) var(--animation-ease),
+                border-color var(--animation-duration) var(--animation-ease);
+    border: none; /* Remove a borda padrão */
+    text-align: center;
+    text-decoration: none; /* Garante que 'a.button' não tenha underline */
+}
+
+.button:hover {
+    transform: translateY(-3px); /* Leve elevação no hover */
+    box-shadow: 0 4px 10px var(--hover-shadow-color);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: 1px solid var(--primary-color);
+}
+
+.primary-button:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border: 1px solid var(--secondary-color);
+}
+
+.secondary-button:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+}
+
+.danger-button {
+    background-color: var(--danger-color);
+    color: var(--text-light);
+    border: 1px solid var(--danger-color);
+}
+
+.danger-button:hover {
+    background-color: var(--danger-dark);
+    border-color: var(--danger-dark);
+}
+
+/* --- 9. Estilos de Tabela (Listagens) --- */
+/* Wrapper para tabelas responsivas */
+.table-responsive {
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre células */
+    background-color: var(--background-card);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que bordas arredondadas funcionem */
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none; /* Remove borda da última linha */
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #FDFDFD; /* Fundo mais claro para linhas pares */
+}
+
+.data-table tbody tr:hover {
+    background-color: #F0F0F0; /* Fundo no hover */
+    transition: background-color var(--animation-duration) var(--animation-ease);
+}
+
+.no-data {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 20px !important;
+}
+
+/* Contêiner para botões de ação dentro da tabela */
+.table-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores, se necessário */
+}
+
+/* Estilo base para botões de ação na tabela */
+.action-button {
+    padding: 8px 15px; /* Padding ajustado para texto */
+    font-size: 0.9em;  /* Fonte um pouco menor para caber melhor na linha */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: transform var(--animation-duration) var(--animation-ease),
+                background-color var(--animation-duration) var(--animation-ease),
+                color var(--animation-duration) var(--animation-ease),
+                border-color var(--animation-duration) var(--animation-ease);
+    text-align: center;
+    white-space: nowrap; /* Evita quebra de linha do texto do botão */
+    /* Remova as propriedades de background e border aqui para que as classes específicas definam */
+    border: 1px solid; /* Adiciona borda, a cor será definida pelas classes de cor */
+}
+
+.action-button:hover {
+    transform: translateY(-2px); /* Efeito de lift um pouco menor */
+    box-shadow: 0 3px 8px var(--hover-shadow-color);
+}
+
+/* Estilos de cor específicos para cada tipo de ação */
+.view-button {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border-color: var(--secondary-color);
+}
+.view-button:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+}
+
+.edit-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+.edit-button:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.delete-button {
+    background-color: var(--danger-color);
+    color: var(--text-light);
+    border-color: var(--danger-color);
+    height: 100%;
+}
+.delete-button:hover {
+    background-color: var(--danger-dark);
+    border-color: var(--danger-dark);
+}
+
+/* --- 10. Mensagens de Feedback (Flash Messages) --- */
+.message {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid transparent;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.message.info {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 11. Estilos de Modal / Pop-up --- */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixado na viewport */
+    z-index: 1000; /* Acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permite rolagem se o conteúdo for grande */
+    background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    opacity: 0;
+    pointer-events: none; /* Não interage quando fechado */
+    transition: opacity var(--animation-duration) var(--animation-ease);
+}
+
+.modal.open {
+    display: flex; /* Mostra o modal */
+    opacity: 1;
+    pointer-events: auto; /* Permite interação */
+}
+
+/* Overlay para escurecer o fundo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999; /* Abaixo do modal-content */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--animation-duration) var(--animation-ease);
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--background-card);
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px var(--hover-shadow-color);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(-20px); /* Começa ligeiramente acima */
+    opacity: 0;
+    transition: transform var(--animation-duration) var(--animation-ease), opacity var(--animation-duration) var(--animation-ease);
+}
+
+.modal.open .modal-content {
+    transform: translateY(0); /* Desliza para a posição final */
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.8em;
+}
+
+.modal-close-button {
+    color: #aaaaaa;
+    font-size: 2.5em;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: var(--text-dark);
+    text-decoration: none;
+    outline: none;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-body p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* --- 12. Estilos de Rodapé --- */
+.main-footer {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+/* --- 13. Responsividade Geral --- */
+@media (max-width: 768px) {
+    /* Ajustes para o Header */
+    .header-content {
+        flex-direction: column; /* Empilha logo, título e navegação verticalmente */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-title {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .header-title h1 {
+        font-size: 1.5em;
+    }
+
+    .main-nav ul {
+        gap: 15px; /* Reduz o espaçamento entre os links de navegação */
+    }
+
+    /* Ajustes para o Conteúdo Principal */
+    .hero-section {
+        padding: 60px 20px;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-section p {
+        font-size: 1.1em;
+    }
+
+    .action-cards-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em telas pequenas */
+        padding: 0 20px 40px;
+    }
+
+    .action-card {
+        padding: 25px;
+    }
+
+    .card-icon {
+        font-size: 3.5em;
+    }
+
+    .card-title {
+        font-size: 1.6em;
+    }
+
+    /* Ajustes para Formulários */
+    .standard-form {
+        padding: 25px;
+    }
+
+    .form-actions {
+        flex-direction: column; /* Empilha os botões de ação verticalmente */
+        gap: 10px;
+        align-items: stretch; /* Estica os botões para a largura total */
+    }
+
+    .form-actions .button {
+        width: 100%;
+    }
+
+    /* Ajustes para Filtros da Lista */
+    .filter-area {
+        padding: 20px;
+    }
+
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-group-inline {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .form-actions-inline {
+        flex-direction: column;
+        width: 100%;
+        align-self: stretch;
+    }
+
+    .form-actions-inline .button {
+        width: 100%;
+    }
+
+    /* Ajustes para Tabelas */
+    .data-table {
+        font-size: 0.9em;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px;
+    }
+
+    .table-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Ajustes para Modais */
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-header h2 {
+        font-size: 1.5em;
+    }
+    .modal-close-button {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes mais finos para telas muito pequenas */
+    .main-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .header-content {
+        align-items: flex-start;
+    }
+
+    .list-section .section-title, .form-section .section-title {
+        font-size: 2.2em;
+    }
+
+    .list-section .section-description, .form-section .section-description {
+        font-size: 1em;
+    }
+
+    .action-button {
+        font-size: 1em;
+        padding: 4px;
+    }
+}
