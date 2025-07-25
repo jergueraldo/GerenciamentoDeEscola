@@ -6,7 +6,7 @@
 - play framework na versão 1.5.3 ou qualquer das versões anteriores à 2.0
 - JDK 8 ou posteriores
 
-## Conceitos abordados:
+## Conceitos abordados
 
 - CRUD
 - Relacionamento entre classes
