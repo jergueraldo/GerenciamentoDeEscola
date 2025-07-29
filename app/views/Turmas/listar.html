@@ -1,0 +1,90 @@
+#{extends 'main.html' /}
+
+#{set title:'Lista de Turmas' /}
+
+<section class="list-section" role="region" aria-labelledby="list-heading">
+
+    <div class="container">
+        <h1 id="list-heading" class="section-title">Turmas</h1>
+        <p class="section-description">Visualize, filtre e gerencie todas as turmas registradas no sistema.</p>
+
+        #{if flash.success}
+        <div class="message success" role="alert">
+            ${flash.success}. Ver <a href="@{Alunos.listar}">listagem de alunos</a>?
+        </div>
+        #{/if}
+        #{if flash.error}
+        <div class="message error" role="alert">
+            ${flash.error}
+        </div>
+        #{/if}
+        #{if flash.info}
+        <div class="message info" role="alert">
+            ${flash.info}
+        </div>
+        #{/if}
+
+        <div class="filter-area">
+            <form action="@{Turmas.listar()}" method="GET" class="filter-form">
+                <div class="form-group-inline">
+                    <label for="filterName">Buscar por Nome ou por Série:</label>
+                    <input type="text" id="filterName" name="filtro" placeholder="Nome ou série">
+                </div>
+
+                <div class="form-actions-inline">
+                    <button type="submit" class="button primary-button">Aplicar Filtros</button>
+                    <a href="@{Turmas.listar()}" class="button secondary-button">Limpar Filtros</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Ano letivo referente</th>
+                        <th>Série</th>
+                        <th>Turno</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    #{if turmas?.isEmpty()}
+                    <tr>
+                        <td colspan="6" class="no-data">Nenhuma turma encontrada com os critérios.</td>
+                    </tr>
+                    #{/if}
+                    #{else}
+                    #{list items:turmas, as:'turma'}
+                    <tr>
+                        <td>${turma.nome}</td>
+                        <td>${turma.anoLetivo}</td>
+                        <td>${turma.serie}</td>
+                        <td>${turma.turno}</td>
+                        <td class="table-actions">
+                            <a href="@{Alunos.form(turma.id)}" class="button action-button edit-button"
+                                title="Editar turma" aria-label="Editar detalhes de ${turma.nome}">
+                                Cadastrar aluno
+                            </a>
+                            <a href="@{Turmas.editar(turma.id)}" class="button action-button edit-button"
+                                title="Editar turma" aria-label="Editar detalhes de ${turma.nome}">
+                                Editar
+                            </a>
+                            <a href="@{Turmas.remover(turma.id)}">
+                                <button type="button" class="button action-button delete-button" title="Excluir turma"
+                                    aria-label="Excluir ${turma.nome}" data-student-id="${turma.id}"
+                                    data-student-name="${turma.nome} ">
+                                    Excluir
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    #{/list}
+                    #{/else}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>

@@ -46,6 +46,7 @@
                         <th>E-mail</th>
                         <th>Telefone</th>
                         <th>Matricula</th>
+                        <th>Turma</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -62,6 +63,7 @@
                         <td>${aluno.email}</td>
                         <td>${aluno.telefone}</td>
                         <td>${aluno.matricula}</td>
+                        <td>${aluno.turma?.nome}</td>
                         <td class="table-actions">
                           
                             <a href="@{Alunos.editar(aluno.id)}" class="button action-button edit-button"

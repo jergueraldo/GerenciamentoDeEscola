@@ -1,0 +1,75 @@
+#{extends 'main.html' /}
+
+#{set title:'Cadastro de Turma' /}
+
+<section class="form-section student-registration-section" role="region" aria-labelledby="registration-heading">
+    <div class="container">
+        <h1 id="registration-heading" class="section-title">
+            #{if turma} Atualizar dados #{/if}
+            #{else} Cadastrar nova turma #{/else}
+        </h1>
+        <p class="section-description">
+            Preencha os detalhes abaixo para
+            #{if turma} atualizar os dados corretamente #{/if}
+            #{else} cadastrar uma nova turma no sistema.#{/else}
+
+        </p>
+
+        #{if flash.success}
+        <div class="message success" role="alert">
+            ${flash.success}. Ver <a href="@{Turmas.listar}">listagem de turmas</a>?
+        </div>
+        #{/if}
+        #{if flash.error}
+        <div class="message error" role="alert">
+            ${flash.error}
+        </div>
+        #{/if}
+        #{if flash.info}
+        <div class="message info" role="alert">
+            ${flash.info}
+        </div>
+        #{/if}
+
+        <form action="@{Turmas.salvar()}" method="POST" class="standard-form" novalidate>
+            <input type="hidden" name="turma.id" value="${turma?.id}">
+
+            <div class="form-group">
+                <label for="firstName">Nome da turma:</label>
+                <input type="text" id="firstName" name="turma.nome"
+                    placeholder="Informe como a turma deve ser refenciada" value="${turma?.nome}" required
+                    aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="enrollmentNumber">Ano letivo:</label>
+                <input type="text" id="enrollmentNumber" name="turma.anoLetivo"
+                    placeholder="Ex: 2025 (limite de 4 anos antes do ano atual)" value="${turma?.anoLetivo}" required
+                    aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="enrollmentNumber">Série:</label>
+                <input type="text" id="enrollmentNumber" name="turma.serie" placeholder="Ex: 5" value="${turma?.serie}"
+                    required aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="turno">Gênero:</label>
+                <select id="turno" name="turma.turno" required aria-required="true">
+
+                    #{list items: turnos, as: "turno"}
+                    <option value="${turno}">${turno}</option>
+                    #{/list}
+                </select>
+            </div>
+
+            <div class="form-group form-actions">
+                <a href="@{Application.index()}" class="button danger-button">Cancelar</a>
+                <button type="submit" class="button primary-button">
+                    #{if turma} Atualizar dados da turma #{/if}
+                    #{else} Cadastrar turma #{/else}
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

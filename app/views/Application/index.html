@@ -7,15 +7,24 @@
 </section>
 
 <section class="action-cards-grid">
-    <article class="action-card" role="article" aria-labelledby="register-student-heading">
+
+    <article class="action-card" role="article" aria-labelledby="turmas-actions-heading">
         <div class="card-icon">
-            <i class="fas fa-user-plus"></i>
+            <i class="fas fa-users"></i>
         </div>
-        <h2 id="register-student-heading" class="card-title">Cadastrar novo aluno</h2>
-        <p class="card-description">Adicione rapidamente novos alunos ao sistema com todos os seus detalhes.</p>
+        <h2 id="turmas-actions-heading" class="card-title">Gerenciar Turmas</h2>
+        <p class="card-description">
+            Acesse a lista completa de turmas registradas, edite turmas ou cadastre novos estudantes.
+        </p>
         <div class="card-actions">
-            <a href="@{Alunos.form()}" class="button primary-button"
-                aria-label="Ir para a página de cadastro de alunos">Cadastrar Aluno</a>
+            <a href="@{Turmas.listar()}" class="button secondary-button"
+                aria-label="Ir para a página de listagem de alunos">
+                Ver turmas
+            </a>
+            <a href="@{Turmas.form()}" class="button primary-button"
+                aria-label="Ir para a página de cadastro de novo aluno">
+                Cadastrar nova turma
+            </a>
         </div>
     </article>
 
@@ -30,4 +39,7 @@
                 aria-label="Ir para a página de listagem de alunos">Ver Alunos</a>
         </div>
     </article>
+
+
+
 </section>

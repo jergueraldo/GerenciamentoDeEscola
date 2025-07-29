@@ -17,4 +17,4 @@
 >  sub-classe = classe que herda/"extende" de outra
 - Mensagens Flash
 
-## Views geradas usando Gemini IA
+## Views geradas usando Gemini I.A

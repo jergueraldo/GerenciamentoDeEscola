@@ -33,6 +33,7 @@
 
         <form action="@{Alunos.salvar()}" method="POST" class="standard-form" novalidate>
             <input type="hidden" name="aluno.id" value="${aluno?.id}">
+            <input type="hidden" name="aluno.turma.id" value="${turma?.id}">
 
             <div class="form-group">
                 <label for="firstName">Nome:</label>
