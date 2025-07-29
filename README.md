@@ -17,4 +17,13 @@
 >  sub-classe = classe que herda/"extende" de outra
 - Mensagens Flash
 
-## Views geradas usando Gemini I.A
+### Views geradas usando Gemini I.A
+
+## Como utilizar
+  ### Para cadastrar alunos, primeiro é necessário cadastrar uma turma.
+  
+- Entre no formulário de cadastro de turmas e efetue o cadastro. 
+- Com o cadastro efetuado, entre na listagem de turmas, e na linha da tabela da turma recém cadastrada, haverá um botão para o cadastro de Alunos, já concretizando o relacionamento entre essas duas entidades. 
+- Após isso, fique à vontade para testar as funções do projeto.
+
+> Ao iniciar o projeto, o inicializador irá prover 3 Turmas iniciais.
